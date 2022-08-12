@@ -1,0 +1,45 @@
+body {
+  --teal: #4191ba;
+  --purple: #4f386c;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+h1 {
+  color: var(--teal);
+  font-size: 80px;
+  text-align: center;
+  text-transform: lowercase;
+  -webkit-text-stroke: 1px var(--purple);
+}
+
+.gallery {
+  display: flex;
+}
+
+.image {
+  width: 400px;
+}
+
+.image img {
+  height: auto;
+  width: 100%;
+}
+
+.image figcaption {
+  color: var(--teal);
+  font-size: 30px;
+  text-align: center;
+  text-transform: lowercase;
+  -webkit-text-stroke: 1px var(--purple);
+}
+
+@media(max-width: 800px) {
+  h1 {
+    font-size: 60px;
+  }
+
+  .image figcaption {
+    font-size: 20px;
+  }
+}
