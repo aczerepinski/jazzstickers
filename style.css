@@ -8,12 +8,31 @@ body {
 h1 {
   color: var(--teal);
   font-size: 80px;
+  margin-bottom: 10px;
   text-align: center;
   text-transform: lowercase;
   -webkit-text-stroke: 1px var(--purple);
 }
 
+a {
+  color: var(--purple);
+  text-decoration: none;
+  -webkit-text-stroke: 1px var(--teal);
+}
+
+.cta {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.cta a {
+  text-transform: lowercase;
+  font-size: 40px;
+}
+
 .gallery {
+  justify-content: center;
   display: flex;
 }
 
@@ -34,9 +53,31 @@ h1 {
   -webkit-text-stroke: 1px var(--purple);
 }
 
+.pulsing {
+  color: #6aff00;
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-name: pulsing;
+}
+
+@keyframes pulsing {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 @media(max-width: 800px) {
   h1 {
     font-size: 60px;
+  }
+
+  .cta a {
+    font-size: 25px;
   }
 
   .image figcaption {
