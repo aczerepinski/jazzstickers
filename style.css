@@ -34,6 +34,7 @@ a {
 .gallery {
   justify-content: center;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .image {
@@ -82,5 +83,9 @@ a {
 
   .image figcaption {
     font-size: 20px;
+  }
+
+  .image {
+    width: 300px;
   }
 }
