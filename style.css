@@ -1,23 +1,41 @@
 body {
-  --teal: #4191ba;
-  --purple: #4f386c;
+  --blue: #28a9e1;
+  --green: #60aaaa;
+  --tan: #cfb2a4;
   font-family: 'Open Sans', sans-serif;
 }
 
 
 h1 {
-  color: var(--teal);
+  color: var(--green);
   font-size: 80px;
   margin-bottom: 10px;
   text-align: center;
   text-transform: lowercase;
-  -webkit-text-stroke: 1px var(--purple);
+  -webkit-text-stroke: 1px var(--blue);
 }
 
 a {
-  color: var(--purple);
+  color: var(--blue);
   text-decoration: none;
-  -webkit-text-stroke: 1px var(--teal);
+  -webkit-text-stroke: 1px var(--green);
+}
+
+.logo figure {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.logo .image img {
+  height: 12rem;
+  width: auto;
 }
 
 .cta {
@@ -47,15 +65,15 @@ a {
 }
 
 .image figcaption {
-  color: var(--teal);
+  color: var(--blue);
   font-size: 30px;
   text-align: center;
   text-transform: lowercase;
-  -webkit-text-stroke: 1px var(--purple);
+  -webkit-text-stroke: 1px var(--green);
 }
 
 .pulsing {
-  color: #6aff00;
+  color: var(--green);
   animation-duration: 2s;
   animation-fill-mode: both;
   animation-iteration-count: infinite;
