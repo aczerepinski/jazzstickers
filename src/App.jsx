@@ -5,18 +5,11 @@ import stickers from './stickers.json';
 function App() {
   return (
     <>
-      <div className="logo">
-        <figure className="image image--square">
-          <img src="/images/jazz_stickers_logo.png" alt="jazzstickers.com logo" />
-        </figure>
-      </div>
-      <div className="cta">
-        <a href="https://www.etsy.com/shop/JazzStickersDotCom" target="_blank" rel="noopener noreferrer">
-          <span className="pulsing">&gt;</span>
-          Visit our Etsy Shop!
-          <span className="pulsing">&lt;</span>
-        </a>
-      </div>
+      <nav className="navbar">
+        <div className="navbar__logo">
+          <img src="/images/jazz_stickers_logo.png" alt="jazzstickers.com logo" className="navbar__logo-img" />
+        </div>
+      </nav>
       <div className="gallery">
         {stickers.map((sticker, idx) => (
           <a
