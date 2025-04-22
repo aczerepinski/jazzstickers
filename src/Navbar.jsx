@@ -15,9 +15,9 @@ const logo = () => {
     display: 'block',
   };
   return (
-    <div className="navbar__logo" style={logoContainerStyles}>
+    <Link to="/" className="navbar__logo" style={logoContainerStyles}>
       <img src="/images/jazz_stickers_logo.png" alt="jazzstickers.com logo" className="navbar__logo-img" style={logoImgStyles} />
-    </div>
+    </Link>
   );
 }
 
@@ -36,25 +36,26 @@ const links = () => {
 
   return (
     <div style={containerStyles}>
-      <Link to="/" style={linkStyles}>Stickers!</Link>
-      <Link to="/instrument-quiz" style={linkStyles}>Instrument Quiz</Link>
+      <Link to="/" style={linkStyles}>Shop Stickers!</Link>
+      <Link to="/instrument-quiz" style={linkStyles}>Instrument Compatibility Quiz</Link>
     </div>
   )
 }
 
 export default function Navbar() {
   const navbarStyles = {
-    width: '100%',
+    width: '100vw',
     background: '#fff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '0.5rem 2rem',
     boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-    position: 'sticky',
+    position: 'fixed',
+    left: 0,
+    right: 0,
     top: 0,
     zIndex: 1000,
-    marginBottom: '2rem',
     boxSizing: 'border-box',
   };
 

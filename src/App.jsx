@@ -9,7 +9,8 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
+      <div style={{ paddingTop: '100px' }}>
+        <Routes>
         <Route path="/" element={
           <div className="gallery">
             {stickers.map((sticker, idx) => (
@@ -19,6 +20,7 @@ function App() {
         } />
         <Route path="/instrument-quiz" element={<InstrumentQuiz />} />
       </Routes>
+      </div>
     </BrowserRouter>
   );
 }
