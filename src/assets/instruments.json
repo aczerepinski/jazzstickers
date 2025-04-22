@@ -1,0 +1,34 @@
+[
+    {
+        "name": "trumpet",
+        "transportationWeightInPounds": 5,
+        "playingWeightInOunces": 40,
+        "leaderPotential": 10,
+        "freelancePotential": 4,
+        "beginnerToIntermediateDifficulty": 5,
+        "intermediateToAdvancedDifficulty": 10,
+        "scholarshipAvailability": 10,
+        "physicalPain": 8
+    },
+    {
+        "name": "acoustic bass",
+        "transportationWeightInPounds": 50,
+        "playingWeightInOunces": 16,
+        "leaderPotential": 3,
+        "freelancePotential": 10,
+        "beginnerToIntermediateDifficulty": 1,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 8,
+        "physicalPain": 9
+    },
+    {
+        "name": "electric bass",
+        "transportationWeightInPounds": 10,
+        "playingWeightInOunces": 100,
+        "leaderPotential": 3,
+        "freelancePotential": 9,
+        "beginnerToIntermediateDifficulty": 1,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 3
+    }
+]

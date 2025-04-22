@@ -9,18 +9,6 @@ body {
   background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
 }
 
-.navbar {
-  width: 100%;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  margin-bottom: 2rem;
-}
 
 .navbar__logo {
   display: flex;
