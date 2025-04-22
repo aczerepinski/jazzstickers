@@ -1,0 +1,110 @@
+body {
+  --blue: #28a9e1;
+  --green: #60aaaa;
+  --tan: #cfb2a4;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #efefef;
+}
+
+
+h1 {
+  color: var(--green);
+  font-size: 80px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-transform: lowercase;
+  -webkit-text-stroke: 1px var(--blue);
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+  -webkit-text-stroke: 1px var(--green);
+}
+
+.logo figure {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.logo .image img {
+  height: 12rem;
+  width: auto;
+}
+
+.cta {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.cta a {
+  text-transform: lowercase;
+  font-size: 40px;
+}
+
+.gallery {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image {
+  width: 400px;
+}
+
+.image img {
+  height: auto;
+  width: 100%;
+}
+
+.image figcaption {
+  color: var(--blue);
+  font-size: 30px;
+  text-align: center;
+  text-transform: lowercase;
+  -webkit-text-stroke: 1px var(--green);
+}
+
+.pulsing {
+  color: var(--green);
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-name: pulsing;
+}
+
+@keyframes pulsing {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@media(max-width: 800px) {
+  h1 {
+    font-size: 60px;
+  }
+
+  .cta a {
+    font-size: 25px;
+  }
+
+  .image figcaption {
+    font-size: 20px;
+  }
+
+  .image {
+    width: 300px;
+  }
+}
