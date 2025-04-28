@@ -1,0 +1,133 @@
+[
+    {
+        "name": "trumpet",
+        "transportationWeightInPounds": 5,
+        "playingWeightInOunces": 40,
+        "leaderPotential": 10,
+        "freelancePotential": 4,
+        "beginnerToIntermediateDifficulty": 5,
+        "intermediateToAdvancedDifficulty": 10,
+        "scholarshipAvailability": 10,
+        "physicalPain": 8,
+        "isTransposing": true
+    },
+    {
+        "name": "trombone",
+        "transportationWeightInPounds": 10,
+        "playingWeightInOunces": 100,
+        "leaderPotential": 1,
+        "freelancePotential": 4,
+        "beginnerToIntermediateDifficulty": 7,
+        "intermediateToAdvancedDifficulty": 10,
+        "scholarshipAvailability": 10,
+        "physicalPain": 5,
+        "isTransposing": false
+    },
+    {
+        "name": "alto sax",
+        "transportationWeightInPounds": 10,
+        "playingWeightInOunces": 72,
+        "leaderPotential": 7,
+        "freelancePotential": 5,
+        "beginnerToIntermediateDifficulty": 5,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 6,
+        "physicalPain": 2,
+        "isTransposing": true
+    },
+    {
+        "name": "tenor sax",
+        "transportationWeightInPounds": 10,
+        "playingWeightInOunces": 112,
+        "leaderPotential": 8,
+        "freelancePotential": 6,
+        "beginnerToIntermediateDifficulty": 5,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 6,
+        "physicalPain": 2,
+        "isTransposing": true
+    },
+    {
+        "name": "bari sax",
+        "transportationWeightInPounds": 10,
+        "playingWeightInOunces": 192,
+        "leaderPotential": 1,
+        "freelancePotential": 7,
+        "beginnerToIntermediateDifficulty": 6,
+        "intermediateToAdvancedDifficulty": 6,
+        "scholarshipAvailability": 7,
+        "physicalPain": 7,
+        "isTransposing": true
+    },
+    {
+        "name": "flute",
+        "transportationWeightInPounds": 2,
+        "playingWeightInOunces": 32,
+        "leaderPotential": 7,
+        "freelancePotential": 1,
+        "beginnerToIntermediateDifficulty": 5,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 3,
+        "physicalPain": 1,
+        "isTransposing": false
+    },
+    {
+        "name": "acoustic bass",
+        "transportationWeightInPounds": 50,
+        "playingWeightInOunces": 16,
+        "leaderPotential": 3,
+        "freelancePotential": 10,
+        "beginnerToIntermediateDifficulty": 1,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 8,
+        "physicalPain": 9,
+        "isTransposing": false
+    },
+    {
+        "name": "electric bass",
+        "transportationWeightInPounds": 10,
+        "playingWeightInOunces": 100,
+        "leaderPotential": 3,
+        "freelancePotential": 9,
+        "beginnerToIntermediateDifficulty": 1,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 3,
+        "physicalPain": 4,
+        "isTransposing": false
+    },
+    {
+        "name": "piano",
+        "transportationWeightInPounds": 40,
+        "playingWeightInOunces": 0,
+        "leaderPotential": 7,
+        "freelancePotential": 7,
+        "beginnerToIntermediateDifficulty": 1,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 3,
+        "physicalPain": 0,
+        "isTransposing": false
+    },
+    {
+        "name": "guitar",
+        "transportationWeightInPounds": 5,
+        "playingWeightInOunces": 96,
+        "leaderPotential": 8,
+        "freelancePotential": 8,
+        "beginnerToIntermediateDifficulty": 1,
+        "intermediateToAdvancedDifficulty": 5,
+        "scholarshipAvailability": 3,
+        "isTransposing": false
+    },
+    {
+        "name": "drums",
+        "transportationWeightInPounds": 50,
+        "playingWeightInOunces": 8,
+        "leaderPotential": 3,
+        "freelancePotential": 10,
+        "beginnerToIntermediateDifficulty": 1,
+        "intermediateToAdvancedDifficulty": 1,
+        "scholarshipAvailability": 3,
+        "physicalPain": 1,
+        "isTransposing": false
+    }
+]
