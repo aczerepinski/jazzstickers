@@ -8,14 +8,18 @@ export default function InstrumentBarChart({ scores }) {
 
   // Resize observer to update width
   useEffect(() => {
-    function updateWidth() {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth);
+    if (!containerRef.current) return;
+    const observer = new window.ResizeObserver(entries => {
+      for (let entry of entries) {
+        if (entry.contentRect) {
+          setContainerWidth(entry.contentRect.width);
+        }
       }
-    }
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
+    });
+    observer.observe(containerRef.current);
+    // Set initial width
+    setContainerWidth(containerRef.current.offsetWidth);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -63,7 +67,7 @@ export default function InstrumentBarChart({ scores }) {
   }, [scores, containerWidth]);
 
   return (
-    <div ref={containerRef} style={{ margin: "2rem auto", maxWidth: 400, background: "#fff", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.06)", padding: '2rem' }}>
+    <div ref={containerRef} style={{ maxWidth: 400, width: '100%', margin: '2rem auto', background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px rgba(0,0,0,0.06)', boxSizing: 'border-box', padding: '2rem' }}>
       <style>{`
         @media (min-width: 800px) {
           .quiz-layout > *:last-child {

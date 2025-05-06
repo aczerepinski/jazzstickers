@@ -95,7 +95,9 @@ export default function SurveyCard({ question, options, tooltip, onSubmit, onPre
       borderRadius: 12,
       boxShadow: '0 2px 12px rgba(0,0,0,0.09)',
       maxWidth: 400,
+      width: '100%',
       margin: '2rem auto',
+      boxSizing: 'border-box',
       minHeight: 300,
       padding: '2rem',
       textAlign: 'left',
@@ -175,7 +177,6 @@ export default function SurveyCard({ question, options, tooltip, onSubmit, onPre
       {/* Progress Bar with Label */}
       <div style={{ width: '100%', marginTop: 18, display: 'flex', alignItems: 'center' }}>
         <svg ref={progressRef} width={340} height={32} style={{ display: 'block', flex: '0 0 auto' }}></svg>
-        <span style={{ marginLeft: 16, fontSize: 15, fontWeight: 600, color: '#361F0B', minWidth: 60, textAlign: 'left' }}>{`${completedCount} / ${totalCount}`}</span>
       </div>
     </form>
   );
