@@ -96,11 +96,19 @@ export default function SurveyCard({ question, options, tooltip, onSubmit, onPre
       boxShadow: '0 2px 12px rgba(0,0,0,0.09)',
       maxWidth: 400,
       margin: '2rem auto',
+      minHeight: 300,
       padding: '2rem',
       textAlign: 'left',
-      position: 'relative',
-      minHeight: 300
+      position: 'relative'
     }}>
+      <style>{`
+        @media (min-width: 800px) {
+          .quiz-layout > *:first-child {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+        }
+      `}</style>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontWeight: 700, fontSize: 20, marginBottom: 8 }}>
         <span>{question}</span>
         {tooltip && (

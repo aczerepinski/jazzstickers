@@ -1,20 +1,36 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
 export default function InstrumentBarChart({ scores }) {
   const ref = useRef();
+  const containerRef = useRef();
+  const [containerWidth, setContainerWidth] = useState(340);
+
+  // Resize observer to update width
+  useEffect(() => {
+    function updateWidth() {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+    }
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
 
   useEffect(() => {
     let data = Object.entries(scores).map(([name, value]) => ({ name, value }));
     data = data.sort((a, b) => b.value - a.value).slice(0, 5);
     const margin = { top: 40, right: 30, bottom: 60, left: 30 };
-    const width = 60 * data.length + margin.left + margin.right;
+    const width = containerWidth;
     const height = 320;
 
     d3.select(ref.current).selectAll("*").remove();
     const svg = d3.select(ref.current)
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("preserveAspectRatio", "xMidYMid meet");
 
     const x = d3.scaleBand()
       .domain(data.map(d => d.name))
@@ -44,14 +60,20 @@ export default function InstrumentBarChart({ scores }) {
       .attr("width", x.bandwidth())
       .attr("height", d => y(0) - y(d.value))
       .attr("fill", "#28a9e1");
-
-
-  }, [scores]);
+  }, [scores, containerWidth]);
 
   return (
-    <div style={{ margin: "2rem auto", maxWidth: 400, background: "#fff", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.06)", padding: '2rem' }}>
+    <div ref={containerRef} style={{ margin: "2rem auto", maxWidth: 400, background: "#fff", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.06)", padding: '2rem' }}>
+      <style>{`
+        @media (min-width: 800px) {
+          .quiz-layout > *:last-child {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+        }
+      `}</style>
       <h2 style={{ fontSize: 20, margin: "0 0 10px 0", color: "#361F0B", textAlign: 'center' }}>Instrument Compatibility</h2>
-      <svg ref={ref}></svg>
+      <svg ref={ref} style={{ width: '100%', height: 320, display: 'block' }}></svg>
     </div>
   );
 }

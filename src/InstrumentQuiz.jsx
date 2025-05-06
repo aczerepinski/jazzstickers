@@ -12,6 +12,35 @@ const getInitialScores = () => instruments.reduce((acc, instrument) => {
 
 const questions = [
   {
+    key: "pain-tolerance",
+    question: "How well are you able to tolerate physical pain?",
+    options: [
+      {
+        label: "What?? Why would I want to play an instrument that hurts?",
+        value: 0
+      },
+      {
+        label: "A little pain is ok as long as I'm not bleeding",
+        value: 5
+      },
+      {
+        label: "I'm ok with losing blood on the bandstand",
+        value: 10
+      }
+    ],
+    tooltip: "Some instruments hurt, especially when you're learning or coming back from vacation",
+    postSubmit: (answer, scores, setScores) => {
+      instruments.forEach(instrument => {
+        if (instrument.physicalPain > answer) {
+          const difference = instrument.physicalPain - answer;
+          setScores({ ...scores, [instrument.name]: scores[instrument.name] -= (difference * 5) });
+        } else {
+          setScores({ ...scores, [instrument.name]: scores[instrument.name] += instrument.physicalPain });
+        }
+      });
+    }
+  },
+  {
     key: "strength",
     question: "How strong are you?",
     options: [
@@ -159,35 +188,6 @@ const questions = [
         });
         setScores(updated);
       }
-    }
-  },
-  {
-    key: "pain-tolerance",
-    question: "How well are you able to tolerate physical pain?",
-    options: [
-      {
-        label: "What?? Why would I want to play an instrument that hurts?",
-        value: 0
-      },
-      {
-        label: "A little pain is ok as long as I'm not bleeding",
-        value: 5
-      },
-      {
-        label: "I'm ok with losing blood on the bandstand",
-        value: 10
-      }
-    ],
-    tooltip: "Some instruments hurt, especially when you're learning or coming back from vacation",
-    postSubmit: (answer, scores, setScores) => {
-      instruments.forEach(instrument => {
-        if (instrument.physicalPain > answer) {
-          const difference = instrument.physicalPain - answer;
-          setScores({ ...scores, [instrument.name]: scores[instrument.name] -= (difference * 5) });
-        } else {
-          setScores({ ...scores, [instrument.name]: scores[instrument.name] += instrument.physicalPain });
-        }
-      });
     }
   },
   {

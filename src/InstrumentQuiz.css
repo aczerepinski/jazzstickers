@@ -1,17 +1,46 @@
 .quiz-layout {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+}
+
+@media (max-width: 799px) {
+  .quiz-layout {
+    align-items: stretch;
+  }
+  .quiz-layout > * {
+    max-width: 400px;
+    margin: 2rem auto;
+  }
+  .quiz-layout > *:first-child {
+    margin-bottom: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  .quiz-layout > *:last-child {
+    margin-top: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
 }
 
 @media (min-width: 800px) {
   .quiz-layout {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: center;
-    gap: 3rem;
   }
   .quiz-layout > * {
     flex: 0 0 auto;
+  }
+  /* Remove right margin from SurveyCard and left margin from InstrumentBarChart */
+  .quiz-layout > *:first-child {
+    margin-right: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  .quiz-layout > *:last-child {
+    margin-left: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
   }
 }
