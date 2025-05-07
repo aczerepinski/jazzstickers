@@ -39,6 +39,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Postbuild (copy index.html to 404.html)
+        run: npm run postbuild
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
