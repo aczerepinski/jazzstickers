@@ -47,12 +47,14 @@ function TooltipIcon({ tip }) {
 
 import * as d3 from "d3";
 
-export default function SurveyCard({ question, options, tooltip, onSubmit, onPrevious, showPrevious, completedCount = 0, totalCount = 1 }) {
+export default function SurveyCard({ question, options, tooltip, onSubmit, onPrevious, showPrevious, completedCount = 0, totalCount = 1, isWelcome = false }) {
   const [selected, setSelected] = useState(null);
   const progressRef = React.useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selected !== null) {
+    if (isWelcome) {
+      onSubmit();
+    } else if (selected !== null) {
       onSubmit(selected);
     }
   };
@@ -119,7 +121,7 @@ export default function SurveyCard({ question, options, tooltip, onSubmit, onPre
       </div>
       <hr style={{ border: 0, borderTop: '1px solid #eee', margin: '16px 0 32px 0' }} />
       <div style={{ marginBottom: 40 }}>
-        {options.map((opt, i) => (
+        {!isWelcome && options.map((opt, i) => (
           <label key={i} style={{ display: 'block', marginBottom: 10, cursor: 'pointer', color: '#361F0B', fontSize: 17, fontWeight: 500 }}>
             <input
               type="radio"
@@ -133,6 +135,11 @@ export default function SurveyCard({ question, options, tooltip, onSubmit, onPre
           </label>
         ))}
       </div>
+      {isWelcome && (
+        <div style={{ marginBottom: 24, color: '#361F0B', fontSize: 17, fontWeight: 400, textAlign: 'center' }}>
+          Using a proprietary algorithm developed by leading jazz scientists, we will help you pick the instrument that can best maximize your potential.
+        </div>
+      )}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 40, marginBottom: 10 }}>
         {showPrevious ? (
           <button
@@ -153,7 +160,24 @@ export default function SurveyCard({ question, options, tooltip, onSubmit, onPre
             Previous
           </button>
         ) : <div />}
-        {options && options.length > 0 && (
+        {isWelcome ? (
+          <button
+            type="submit"
+            style={{
+              background: '#28a9e1',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 6,
+              padding: '0.5em 1.5em',
+              fontWeight: 600,
+              fontSize: 16,
+              cursor: 'pointer',
+              boxShadow: '0 1px 4px rgba(0,0,0,0.05)'
+            }}
+          >
+            Begin
+          </button>
+        ) : options && options.length > 0 && (
           <button
             type="submit"
             disabled={selected === null}

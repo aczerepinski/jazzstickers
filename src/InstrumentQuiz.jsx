@@ -223,71 +223,86 @@ const questions = [
   }
 ];
 
-
 export default function InstrumentQuiz() {
-  const [submissions, setSubmissions] = useState([]);
-  const [instrumentScores, setInstrumentScores] = useState(getInitialScores);
-  const currentIdx = submissions.length;
-  const currentQuestion = questions[currentIdx];
+      const [submissions, setSubmissions] = useState([]);
+      const [instrumentScores, setInstrumentScores] = useState(getInitialScores);
+      const [showWelcome, setShowWelcome] = useState(true);
+      const currentIdx = submissions.length;
+      const currentQuestion = questions[currentIdx];
 
-  const handleSubmit = (answer) => {
-    if (currentQuestion && currentQuestion.postSubmit) {
-      currentQuestion.postSubmit(answer, instrumentScores, setInstrumentScores);
+      const handleSubmit = (answer) => {
+        if (currentQuestion && currentQuestion.postSubmit) {
+          currentQuestion.postSubmit(answer, instrumentScores, setInstrumentScores);
+        }
+        setSubmissions([...submissions, answer]);
+      };
+
+      // Handles going to the previous question and resetting scores
+      const handlePrevious = () => {
+        const newSubmissions = submissions.slice(0, -1);
+        // Re-initialize scores
+        let scores = getInitialScores();
+        // Replay postSubmit for each answered question
+        newSubmissions.forEach((answer, idx) => {
+          const q = questions[idx];
+          if (q.postSubmit) {
+            // Use a dummy setter to update the local scores object
+            q.postSubmit(answer, scores, updated => { scores = updated; });
+          }
+        });
+        setInstrumentScores(scores);
+        setSubmissions(newSubmissions);
+      };
+
+      return (
+        <div style={{}}>
+          <div className="quiz-layout">
+            {showWelcome ? (
+              <>
+                <SurveyCard
+                  question={"Welcome to the JazzStickers.com Instrument Compatability Quiz"}
+                  options={[]}
+                  tooltip={null}
+                  onSubmit={() => setShowWelcome(false)}
+                  showPrevious={false}
+                  onPrevious={() => {}}
+                  completedCount={0}
+                  totalCount={questions.length}
+                  isWelcome={true}
+                />
+                <InstrumentBarChart scores={instrumentScores} />
+              </>
+            ) : currentIdx < questions.length ? (
+              <>
+                <SurveyCard
+                  question={currentQuestion.question}
+                  options={currentQuestion.options}
+                  tooltip={currentQuestion.tooltip}
+                  onSubmit={handleSubmit}
+                  showPrevious={currentIdx > 0}
+                  onPrevious={handlePrevious}
+                  completedCount={currentIdx}
+                  totalCount={questions.length}
+                />
+                <InstrumentBarChart scores={instrumentScores} />
+              </>
+            ) : (
+              <>
+                <SurveyCard
+                  question={`Survey complete. The instrument you should play is ${Object.entries(instrumentScores).sort((a, b) => b[1] - a[1])[0][0]}`}
+                  options={[]}
+                  tooltip={null}
+                  onSubmit={() => {}}
+                  showPrevious={true}
+                  onPrevious={handlePrevious}
+                  completedCount={currentIdx}
+                  totalCount={questions.length}
+                />
+                <InstrumentBarChart scores={instrumentScores} />
+              </>
+            )}
+          </div>
+        </div>
+      );
     }
-    setSubmissions([...submissions, answer]);
-  };
-
-  // Handles going to the previous question and resetting scores
-  const handlePrevious = () => {
-    const newSubmissions = submissions.slice(0, -1);
-    // Re-initialize scores
-    let scores = getInitialScores();
-    // Replay postSubmit for each answered question
-    newSubmissions.forEach((answer, idx) => {
-      const q = questions[idx];
-      if (q.postSubmit) {
-        // Use a dummy setter to update the local scores object
-        q.postSubmit(answer, scores, updated => { scores = updated; });
-      }
-    });
-    setInstrumentScores(scores);
-    setSubmissions(newSubmissions);
-  };
-
-  return (
-    <div style={{}}>
-      <div className="quiz-layout">
-        {currentIdx < questions.length ? (
-          <>
-            <SurveyCard
-              question={currentQuestion.question}
-              options={currentQuestion.options}
-              tooltip={currentQuestion.tooltip}
-              onSubmit={handleSubmit}
-              showPrevious={currentIdx > 0}
-              onPrevious={handlePrevious}
-              completedCount={currentIdx}
-              totalCount={questions.length}
-            />
-            <InstrumentBarChart scores={instrumentScores} />
-          </>
-        ) : (
-          <>
-            <SurveyCard
-              question={`Survey complete. The instrument you should play is ${Object.entries(instrumentScores).sort((a, b) => b[1] - a[1])[0][0]}`}
-              options={[]}
-              tooltip={null}
-              onSubmit={() => {}}
-              showPrevious={true}
-              onPrevious={handlePrevious}
-              completedCount={currentIdx}
-              totalCount={questions.length}
-            />
-            <InstrumentBarChart scores={instrumentScores} />
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
 
