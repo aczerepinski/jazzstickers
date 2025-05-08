@@ -1,73 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
-import * as d3 from "d3";
+import React from "react";
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import colors from "./colors";
 
 export default function InstrumentBarChart({ scores }) {
-  const ref = useRef();
-  const containerRef = useRef();
-  const [containerWidth, setContainerWidth] = useState(340);
-
-  // Resize observer to update width
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const observer = new window.ResizeObserver(entries => {
-      for (let entry of entries) {
-        if (entry.contentRect) {
-          setContainerWidth(entry.contentRect.width);
-        }
-      }
-    });
-    observer.observe(containerRef.current);
-    // Set initial width
-    setContainerWidth(containerRef.current.offsetWidth);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    let data = Object.entries(scores).map(([name, value]) => ({ name, value }));
-    data = data.sort((a, b) => b.value - a.value).slice(0, 5);
-    const margin = { top: 40, right: 30, bottom: 60, left: 30 };
-    const width = containerWidth;
-    const height = 320;
-
-    d3.select(ref.current).selectAll("*").remove();
-    const svg = d3.select(ref.current)
-      .attr("width", width)
-      .attr("height", height)
-      .attr("viewBox", `0 0 ${width} ${height}`)
-      .attr("preserveAspectRatio", "xMidYMid meet");
-
-    const x = d3.scaleBand()
-      .domain(data.map(d => d.name))
-      .range([margin.left, width - margin.right])
-      .padding(0.22);
-
-    const maxValue = data.length > 0 ? Math.max(...data.map(d => d.value)) : 100;
-    const y = d3.scaleLinear()
-      .domain([0, maxValue])
-      .range([height - margin.bottom, margin.top]);
-
-    svg.append("g")
-      .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x))
-      .selectAll("text")
-      .attr("transform", "rotate(-30)")
-      .attr("text-anchor", "end")
-      .style("font-size", "13px");
-
-    svg.selectAll("rect.bar")
-      .data(data)
-      .enter()
-      .append("rect")
-      .attr("class", "bar")
-      .attr("x", d => x(d.name))
-      .attr("y", d => y(d.value))
-      .attr("width", x.bandwidth())
-      .attr("height", d => y(0) - y(d.value))
-      .attr("fill", "#28a9e1");
-  }, [scores, containerWidth]);
+  const data = Object.entries(scores)
+    .map(([name, value]) => ({ name, compatibility: value }))
+    .sort((a, b) => b.compatibility - a.compatibility)
+    .slice(0, 5);
 
   return (
-    <div ref={containerRef} style={{ maxWidth: 400, width: '100%', margin: '2rem auto', background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px rgba(0,0,0,0.06)', boxSizing: 'border-box', padding: '2rem' }}>
+    <div
+      style={{
+        width: '100%',
+        maxWidth: 400, // Match SurveyCard
+        background: '#fff',
+        borderRadius: 12,
+        boxShadow: '0 2px 12px rgba(0,0,0,0.09)',
+        padding: '2rem',
+        margin: '2rem auto',
+        minHeight: 340,
+        boxSizing: 'border-box'
+      }}
+    >
       <style>{`
         @media (min-width: 800px) {
           .quiz-layout > *:last-child {
@@ -77,7 +31,14 @@ export default function InstrumentBarChart({ scores }) {
         }
       `}</style>
       <h2 style={{ fontSize: 20, margin: "0 0 10px 0", color: "#361F0B", textAlign: 'center' }}>Instrument Compatibility</h2>
-      <svg ref={ref} style={{ width: '100%', height: 320, display: 'block' }}></svg>
+      <ResponsiveContainer width="100%" height={400}>
+        <BarChart data={data} margin={{ top: 20, right: 20, bottom: 60, left: 40 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" angle={-30} textAnchor="end" interval={0} height={60} style={{ fontSize: 13 }} />
+          <Tooltip />
+          <Bar dataKey="compatibility" fill={colors.blue} radius={[2, 2, 0, 0]} />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }
