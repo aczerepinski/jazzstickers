@@ -1,6 +1,6 @@
 import Valve from './Valve';
 
-export default function ValveBlock() {
+export default function ValveBlock({ valves = [false, false, false] }) {
   return (
     <div
       style={{
@@ -18,9 +18,9 @@ export default function ValveBlock() {
         justifyContent: 'center',
       }}
     >
-      <Valve />
-      <Valve />
-      <Valve />
+      <Valve depressed={valves[0]} />
+      <Valve depressed={valves[1]} />
+      <Valve depressed={valves[2]} />
     </div>
   );
 }

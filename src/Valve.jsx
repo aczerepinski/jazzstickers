@@ -30,30 +30,43 @@ function ValveChamber() {
   );
 }
 
-function Piston() {
+function Piston({ depressed }) {
   return (
     <div
       style={{
         width: 20,
-        height: 40,
+        height: depressed ? 0 : 40,
         background: 'linear-gradient(90deg, #ccc 0%, #eee 100%)',
         borderRadius: 0,
         margin: 0,
         boxShadow: '0 1px 4px rgba(0,0,0,0.10)',
         borderLeft: '2px solid #aaa',
         borderRight: '2px solid #aaa',
+        transition: 'height 0.15s cubic-bezier(.4,2,.6,1)',
+        overflow: 'hidden',
       }}
     />
   );
 }
 
-export default function Valve() {
+import React from 'react';
+
+export default function Valve({ depressed = false }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', minHeight: 260 }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      minHeight: 260,
+      height: 260,
+      width: 80,
+    }}>
       <ValveCap />
-      <Piston />
+      <Piston depressed={depressed} />
       <ValveChamber />
     </div>
   );
 }
+
 
