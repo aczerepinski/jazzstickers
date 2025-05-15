@@ -39,18 +39,15 @@ const links = () => {
     display: 'inline-block',
   };
   const buttonStyles = {
-    background: '#fff',
-    color: colors.brown,
-    border: '1px solid #ccc',
-    borderRadius: 4,
-    padding: '0.5em 1em',
-    fontSize: 16,
+    background: 'transparent',
+    border: 'none',
+    padding: 0,
+    font: 'inherit',
     cursor: 'pointer',
-    fontWeight: 600,
     marginLeft: '1rem',
+    ...linkStyles,
   };
   const menuStyles = {
-    display: 'none',
     position: 'absolute',
     background: '#fff',
     minWidth: 200,
@@ -59,7 +56,8 @@ const links = () => {
     borderRadius: 6,
     overflow: 'hidden',
     marginTop: 4,
-    right: 0
+    right: 0,
+    border: '1px solid #ddd',
   };
   const menuItemStyles = {
     color: colors.brown,
@@ -82,10 +80,12 @@ const links = () => {
         <button style={buttonStyles} aria-haspopup="true" aria-expanded={open}>
           Jazz Resources &#x25BC;
         </button>
-        <div style={{...menuStyles, display: open ? 'block' : 'none'}}>
-          <Link to="/instrument-quiz" style={menuItemStyles}>Instrument Compatibility Quiz</Link>
-          <Link to="/trumpet-game" style={menuItemStyles}>Trumpet Game</Link>
-        </div>
+        {open && (
+          <div style={menuStyles}>
+            <Link to="/instrument-quiz" style={menuItemStyles}>Instrument Compatibility Quiz</Link>
+            <Link to="/trumpet-game" style={menuItemStyles}>Trumpet Game</Link>
+          </div>
+        )}
       </div>
     </div>
   )

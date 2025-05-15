@@ -1,3 +1,5 @@
+import Valve from './Valve';
+
 export default function ValveBlock() {
   return (
     <div
@@ -16,7 +18,10 @@ export default function ValveBlock() {
         justifyContent: 'center',
       }}
     >
-      ValveBlock Placeholder
+      <Valve />
+      <Valve />
+      <Valve />
     </div>
   );
 }
+
