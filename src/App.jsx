@@ -4,6 +4,7 @@ import stickers from './stickers.json';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import InstrumentQuiz from './InstrumentQuiz';
 import Navbar from './Navbar';
+import TrumpetGame from './TrumpetGame';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           </div>
         } />
         <Route path="/instrument-quiz" element={<InstrumentQuiz />} />
+        <Route path="/trumpet-game" element={<TrumpetGame />} />
       </Routes>
       </div>
     </BrowserRouter>
