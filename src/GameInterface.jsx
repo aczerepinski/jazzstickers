@@ -30,7 +30,7 @@ export default function GameInterface({ note, gameState = "inGame", onStart, tim
         ) : gameState === "preGame" ? (
           <PreTrumpetGame onStart={onStart} />
         ) : (
-          <PostTrumpetGame onRestart={onRestart} />
+          <PostTrumpetGame onRestart={onRestart} score={score} />
         )}
       </div>
     </div>
