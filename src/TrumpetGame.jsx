@@ -31,7 +31,7 @@ export default function TrumpetGame() {
   return (
     <div>
       <h1>Trumpet Game</h1>
-      <SheetMusic />
+      <SheetMusic note="C5"/>
       <ValveBlock valves={valves} />
     </div>
   );
