@@ -14,8 +14,7 @@ export default function TrumpetGame() {
   });
   const [lastNote, setLastNote] = React.useState(null);
   const [gameState, setGameState] = React.useState('preGame'); // 'preGame', 'inGame', 'postGame'
-  // Timer state (not displayed in UI yet)
-  const [timerStarted, setTimerStarted] = React.useState(false);
+  // Timer state
   const [timeLeft, setTimeLeft] = React.useState(30);
 
   // Key listeners for valves and spacebar
@@ -68,24 +67,30 @@ export default function TrumpetGame() {
     };
   }, [currentNote, noteNames, valves]);
 
-  // Timer effect (optional, not displayed)
+  // Timer effect: decrement once per second in inGame
   React.useEffect(() => {
-    if (!timerStarted) return;
-    if (timeLeft <= 0) return;
-    const timer = setInterval(() => {
-      setTimeLeft(t => t - 1);
+    if (gameState !== 'inGame') return;
+    if (timeLeft === 0) {
+      setGameState('postGame');
+      return;
+    }
+    const interval = setInterval(() => {
+      setTimeLeft((t) => (t > 0 ? t - 1 : 0));
     }, 1000);
-    return () => clearInterval(timer);
-  }, [timerStarted, timeLeft]);
-
-  // Start timer on mount (optional)
-  React.useEffect(() => {
-    setTimerStarted(true);
-  }, []);
+    return () => clearInterval(interval);
+  }, [gameState, timeLeft]);
 
   return (
     <div>
-      <GameInterface note={currentNote} gameState={gameState} onStart={() => setGameState('inGame')} />
+      <GameInterface
+        note={currentNote}
+        gameState={gameState}
+        timeLeft={timeLeft}
+        onStart={() => {
+          setTimeLeft(30);
+          setGameState('inGame');
+        }}
+      />
       <ValveBlock valves={valves} />
     </div>
   );
