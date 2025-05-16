@@ -4,6 +4,7 @@ import ValveBlock from './ValveBlock';
 
 import React from 'react';
 import trumpetNotes from './trumpetNotes.json';
+import { playTrumpetFrequency } from './audioUtils';
 
 export default function TrumpetGame() {
   const [score, setScore] = React.useState(0);
@@ -38,12 +39,13 @@ export default function TrumpetGame() {
         const match = valves.every((valve, i) => valve === correctFingering[i]);
         if (match) {
           setScore(s => s + 1);
+          // Play sound for correct answer
+          playTrumpetFrequency(trumpetNotes[currentNote].frequency);
           // Pick a new random note, not the same as current
           let nextNote;
           do {
-            const idx = Math.floor(Math.random() * noteNames.length);
-            nextNote = noteNames[idx];
-          } while (nextNote === currentNote && noteNames.length > 1);
+            nextNote = noteNames[Math.floor(Math.random() * noteNames.length)];
+          } while (nextNote === currentNote || nextNote === lastNote);
           setLastNote(currentNote);
           setCurrentNote(nextNote);
           setValves([false, false, false]);
