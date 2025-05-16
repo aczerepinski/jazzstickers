@@ -21,7 +21,7 @@ export default function PreTrumpetGame({ onStart }) {
         - Use the 1, 2, and 3 keys (or 7, 8, and 9) on your keyboard to depress the correct trumpet valves.
       </span> 
       <span style={{fontSize: 14, color: '#888', marginBottom: 10}}>
-        - Press the spacebar or 0 (zero) to submit your valve selection and play the trumpet.
+        - Press 0 (zero) to submit your valve selection and play the trumpet.
       </span>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 16 }}>
         <button

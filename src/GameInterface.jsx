@@ -4,7 +4,7 @@ import SheetMusic from "./SheetMusic";
 import PreTrumpetGame from "./PreTrumpetGame";
 import PostTrumpetGame from "./PostTrumpetGame";
 
-export default function GameInterface({ note, gameState = "inGame", onStart, timeLeft }) {
+export default function GameInterface({ note, gameState = "inGame", onStart, timeLeft, score, onRestart }) {
   return (
     <div
       style={{
@@ -22,7 +22,7 @@ export default function GameInterface({ note, gameState = "inGame", onStart, tim
         overflow: 'hidden',
       }}
     >
-      <Scoreboard time={timeLeft} score={0} />
+      <Scoreboard time={timeLeft} score={score} />
       <div style={{ borderTop: '1px solid #e0e0e0', width: '100%' }} />
       <div style={{ padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 120 }}>
         {gameState === "inGame" ? (
@@ -30,7 +30,7 @@ export default function GameInterface({ note, gameState = "inGame", onStart, tim
         ) : gameState === "preGame" ? (
           <PreTrumpetGame onStart={onStart} />
         ) : (
-          <PostTrumpetGame />
+          <PostTrumpetGame onRestart={onRestart} />
         )}
       </div>
     </div>

@@ -6,6 +6,7 @@ import React from 'react';
 import trumpetNotes from './trumpetNotes.json';
 
 export default function TrumpetGame() {
+  const [score, setScore] = React.useState(0);
   const noteNames = React.useMemo(() => Object.keys(trumpetNotes), []);
   const [valves, setValves] = React.useState([false, false, false]);
   const [currentNote, setCurrentNote] = React.useState(() => {
@@ -36,6 +37,7 @@ export default function TrumpetGame() {
         const correctFingering = trumpetNotes[currentNote].fingering;
         const match = valves.every((valve, i) => valve === correctFingering[i]);
         if (match) {
+          setScore(s => s + 1);
           // Pick a new random note, not the same as current
           let nextNote;
           do {
@@ -45,6 +47,8 @@ export default function TrumpetGame() {
           setLastNote(currentNote);
           setCurrentNote(nextNote);
           setValves([false, false, false]);
+        } else {
+          setScore(s => s - 1);
         }
       }
     }
@@ -86,8 +90,15 @@ export default function TrumpetGame() {
         note={currentNote}
         gameState={gameState}
         timeLeft={timeLeft}
+        score={score}
         onStart={() => {
           setTimeLeft(30);
+          setScore(0);
+          setGameState('inGame');
+        }}
+        onRestart={() => {
+          setTimeLeft(30);
+          setScore(0);
           setGameState('inGame');
         }}
       />
