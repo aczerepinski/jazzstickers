@@ -73,17 +73,42 @@ const links = () => {
   };
   // Simple dropdown logic
   const [open, setOpen] = React.useState(false);
+
+  // Close dropdown when clicking outside
+  const dropdownRef = React.useRef();
+  React.useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    }
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open]);
+
   return (
     <div style={containerStyles}>
       <Link to="/" style={linkStyles}>Shop Stickers!</Link>
-      <div style={dropdownStyles} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-        <button style={buttonStyles} aria-haspopup="true" aria-expanded={open}>
+      <div style={dropdownStyles} ref={dropdownRef}>
+        <button
+          style={buttonStyles}
+          aria-haspopup="true"
+          aria-expanded={open}
+          onClick={() => setOpen(o => !o)}
+          onKeyDown={e => {
+            if (e.key === 'Escape') setOpen(false);
+          }}
+        >
           Jazz Resources &#x25BC;
         </button>
         {open && (
-          <div style={menuStyles}>
-            <Link to="/instrument-quiz" style={menuItemStyles}>Instrument Compatibility Quiz</Link>
-            <Link to="/trumpet-game" style={menuItemStyles}>Trumpet Game</Link>
+          <div style={menuStyles} tabIndex={-1}>
+            <Link to="/instrument-quiz" style={menuItemStyles} onClick={() => setOpen(false)}>Instrument Compatibility Quiz</Link>
+            <Link to="/trumpet-game" style={menuItemStyles} onClick={() => setOpen(false)}>Trumpet Game</Link>
           </div>
         )}
       </div>
