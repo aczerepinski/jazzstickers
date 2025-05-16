@@ -4,7 +4,7 @@ import ValveBlock from './ValveBlock';
 
 import React from 'react';
 import trumpetNotes from './trumpetNotes.json';
-import { playTrumpetFrequency } from './audioUtils';
+import { playTrumpetFrequency, playWrongAnswerSound } from './audioUtils';
 
 export default function TrumpetGame() {
   const [score, setScore] = React.useState(0);
@@ -51,6 +51,7 @@ export default function TrumpetGame() {
           setValves([false, false, false]);
         } else {
           setScore(s => s - 1);
+          playWrongAnswerSound();
         }
       }
     }
