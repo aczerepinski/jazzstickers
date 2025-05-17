@@ -34,6 +34,8 @@ export default function TrumpetGame() {
       }
       // Accept spacebar and 0 for submit
       if (e.code === 'Space' || e.key === ' ' || e.key === '0') {
+        // Only allow submissions if gameState is 'inGame'
+        if (gameState !== 'inGame') return;
         // On spacebar/0, check if valves match fingering
         const correctFingering = trumpetNotes[currentNote].fingering;
         const match = valves.every((valve, i) => valve === correctFingering[i]);
@@ -87,6 +89,26 @@ export default function TrumpetGame() {
     return () => clearInterval(interval);
   }, [gameState, timeLeft]);
 
+  function handleSubmit() {
+    if (gameState !== 'inGame') return;
+    const correctFingering = trumpetNotes[currentNote].fingering;
+    const match = valves.every((valve, i) => valve === correctFingering[i]);
+    if (match) {
+      setScore(s => s + 1);
+      playTrumpetFrequency(trumpetNotes[currentNote].frequency);
+      let nextNote;
+      do {
+        nextNote = noteNames[Math.floor(Math.random() * noteNames.length)];
+      } while (nextNote === currentNote || nextNote === lastNote);
+      setLastNote(currentNote);
+      setCurrentNote(nextNote);
+      setValves([false, false, false]);
+    } else {
+      setScore(s => s - 1);
+      playWrongAnswerSound();
+    }
+  }
+
   return (
     <div>
       <GameInterface
@@ -105,7 +127,12 @@ export default function TrumpetGame() {
           setGameState('inGame');
         }}
       />
-      <ValveBlock valves={valves} />
+      <ValveBlock
+        valves={valves}
+        onValveDown={idx => setValves(v => v.map((pressed, i) => (i === idx ? true : pressed)))}
+        onValveUp={idx => setValves(v => v.map((pressed, i) => (i === idx ? false : pressed)))}
+        onSubmit={gameState === 'inGame' ? handleSubmit : undefined}
+      />
     </div>
   );
 }

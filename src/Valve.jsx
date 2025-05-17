@@ -54,7 +54,7 @@ function Piston({ height }) {
 
 import React from 'react';
 
-export default function Valve({ depressed = false }) {
+export default function Valve({ depressed = false, onMouseDown, onMouseUp, onTouchStart, onTouchEnd }) {
   const pistonFullHeight = 40
   const pistonHeight = depressed ? 0 : pistonFullHeight;
   const capHeight = 20;
@@ -62,16 +62,22 @@ export default function Valve({ depressed = false }) {
   const fullHeight = capHeight + pistonFullHeight + chamberHeight;
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      minHeight: fullHeight,
-      height: fullHeight,
-      width: 80,
-      boxSizing: 'border-box',
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        minHeight: fullHeight,
+        height: fullHeight,
+        width: 80,
+        boxSizing: 'border-box',
+      }}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <ValveCap height={capHeight} />
       <Piston height={pistonHeight} />
       <ValveChamber height={chamberHeight} />
