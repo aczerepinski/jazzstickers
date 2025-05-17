@@ -20,8 +20,13 @@ export default function ValveBlock({ valves = [false, false, false], onValveDown
       }}
     >
       {onSubmit && (
-        <button
+        <div
           onClick={onSubmit}
+          onTouchStart={e => { e.preventDefault(); onSubmit(); }}
+          role="button"
+          tabIndex={0}
+          aria-label="Submit valves"
+          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { onSubmit(); } }}
           style={{
             position: 'absolute',
             top: 10,
@@ -35,13 +40,17 @@ export default function ValveBlock({ valves = [false, false, false], onValveDown
             fontWeight: 600,
             fontSize: 14,
             cursor: 'pointer',
-            boxShadow: '0 1px 4px rgba(0,0,0,0.08)'
+            boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
+            userSelect: 'none',
+            WebkitTapHighlightColor: 'transparent',
+            outline: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-          tabIndex={0}
-          aria-label="Submit valves"
         >
           Submit
-        </button>
+        </div>
       )}
       <Valve
         depressed={valves[0]}
