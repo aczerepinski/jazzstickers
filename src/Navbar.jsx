@@ -109,6 +109,7 @@ const links = () => {
           <div style={menuStyles} tabIndex={-1}>
             <Link to="/instrument-quiz" style={menuItemStyles} onClick={() => setOpen(false)}>Instrument Compatibility Quiz</Link>
             <Link to="/trumpet-game" style={menuItemStyles} onClick={() => setOpen(false)}>Trumpet Game</Link>
+            <Link to="/graphic-novels" style={menuItemStyles} onClick={() => setOpen(false)}>Jazz Graphic Novels</Link>
           </div>
         )}
       </div>

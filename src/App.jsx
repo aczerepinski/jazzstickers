@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import InstrumentQuiz from './InstrumentQuiz';
 import Navbar from './Navbar';
 import TrumpetGame from './TrumpetGame';
+import GraphicNovels from './GraphicNovels';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         } />
         <Route path="/instrument-quiz" element={<InstrumentQuiz />} />
         <Route path="/trumpet-game" element={<TrumpetGame />} />
+        <Route path="/graphic-novels" element={<GraphicNovels />} />
       </Routes>
       </div>
     </BrowserRouter>
